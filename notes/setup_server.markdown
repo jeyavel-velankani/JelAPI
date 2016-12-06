@@ -137,7 +137,7 @@ This step will overwrite our Ruby version to an older one. To resolve this, simp
 * 'sudo ln -s /usr/local/bin/ruby /usr/bin/ruby'
 
 ##Set Up The Web Server
-Open the Nginx configuration file:
+Open the Nginx configuration file: 
 
 * 'sudo nano /etc/nginx/nginx.conf'
 
