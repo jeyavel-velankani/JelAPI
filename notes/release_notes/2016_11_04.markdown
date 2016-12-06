@@ -1,0 +1,15 @@
+## Deployed to:
+
+## Changelog
+* Subscriber retrieve sponsorship api- Terminated sponsorships will not be there in the retrieve sponsorship list.
+
+* Changed sdx_mno_rating_group_id to sdx_rating_group_id in create-sponsorship-info and read-sponsorship-info data structures and in sponsorship table.
+
+## Fixed Issues
+* Sponsor login api - If machine id is blank invalid_machine_id will be returned instead of internal-server error.
+
+
+## Test Case Report
+* All relevant test cases are passing in the server. Steps to run them in the server:
+  1) cd /home/Velankani/apps/sdx_qm/current
+  2) RAILS_ENV=test bundle exec rails test test/integration/subscriber_apis/ test/integration/sponsor_apis/ test/integration/call_data_record/ test/integration/claimed_and_unclaimed_bytes/ test/integration/auth_apis/check_for_sponsorship_updates_test.rb test/models/

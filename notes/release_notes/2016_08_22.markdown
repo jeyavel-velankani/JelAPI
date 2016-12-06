@@ -1,0 +1,9 @@
+# Aug 22, 2016 Release Notes
+
+1) Subscriber and Sponsorships are not related by foreign key any more. The lookup (a subscriber's sponsorships) is now based upon the matching recipient info (at sponsorship side), and the user id type params (at subscriber side).
+
+2) The report-sponsorship-quotas-usage issue that Karthik just reported is also fixed and deployed.
+
+3) Attempts to change state of a sponsorship - even if it may fail - are logged
+
+4) Unique index on subscriber's auth_token is removed.

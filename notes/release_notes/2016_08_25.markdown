@@ -1,0 +1,26 @@
+# Aug 25, 2016 Release Notes
+
+
+## Changelog
+* QM sponsor-side apis done:
+  - login
+  - create-sponsorship
+  - get-sponsorship-id
+
+
+## Things to be aware of
+* For create_sponsorship, read_sponsorship apis: param recipient_user_Id changed to recipient_user_id to be consistent with rest of the system.
+
+* start_time, end_time db value and api value difference:
+In api, these values are represented as integers (unix epoch time).
+In db, these are represented as mysql datetime types.
+Internally, the sponsorships table has a 'can_expire' boolean which is set to true by default.
+If a sponsorship cannot expire (incoming end_time value is '0'), then can_expire will be changed to false, and end_time will be set to null.
+
+* when a sponsorship is created, if the corresponding subscriber already exists in the system (match done using sponsorship recipient info values), the subscriber's 'last_sponsorship_updated_at' is updated to hold the sponsorship's created time. (useful for check-for-sponsorship-updates api).
+
+* machine_id filtered out of logs.
+
+
+## Fixed Issue(s)
+* deactivate sponsorship api now reports invalid_quota_info just like report usage api, when reported usage is less than existing reported usage. (I had earlier retured success for it. It was implemented as per the API handler guidelines in Protocol doc, but it seems to be not consistent with the report usage api's behavior).

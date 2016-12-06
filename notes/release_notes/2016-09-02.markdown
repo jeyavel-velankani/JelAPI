@@ -1,0 +1,43 @@
+# September 2 Release - QM
+
+## Changelog
+* DynamoDB entries for CallDataRecords for these events:
+  - create sponsorship via create-sponsorship api
+  - consume sponsorship via any (reporting) apis
+  - expire sponsorship via any (reporting) apis
+  - first retrieve via retrieve-sponsorships api
+  - first activate via activate-sponsorships api
+
+
+## AWS DynamoDB
+The dynamoDB table I created for the dev server's QM instance is this: qm_staging_dev_cdr. The entries (called as items) that the dev server QM makes will be found in this table.
+
+
+### AWS Account Concerns
+1) The dynamoDB table was created using these properties:
+  key_schema: [
+    {attribute_name: 'timestamp', key_type: 'HASH'},
+    {attribute_name: 'sponsor_id', key_type: 'RANGE'}
+  ],
+  attribute_definitions: [
+    {attribute_name: 'timestamp', attribute_type: 'N'},
+    {attribute_name: 'sponsor_id', attribute_type: 'S'}
+  ],
+  provisioned_throughput: {
+    read_capacity_units: 1,
+    write_capacity_units: 1
+  }
+
+timestamp(number) and sponsor_id(string) together are considered for key schema.
+Choosing the right key schema will only yield better performance in terms of partitioning and distributing read/write requests across the partitions. Please let us know if this can be improved.
+
+
+2) The dev server uses the access_key and secret_access_key generated from the AWS IAM User - VelPrasanna - which is mine. And only with that keys QM is currently able to talk to DynamoDB via its API.
+
+Ideally these keys should be generated from QM's own account, considering security. Please let me know if this has to be changed in the next release.
+
+
+## Test Case Report
+* All relevant test cases are passing in the server (see attachment). Steps to run them in the server:
+  1) cd /home/Velankani/apps/sdx_qm/current
+  2) RAILS_ENV=test bundle exec rails test test/integration/subscriber_apis/ test/integration/sponsor_apis/sponsor_login_test.rb test/integration/sponsor_apis/create_sponsorship/ test/integration/sponsor_apis/read_sponsorship/ test/integration/sponsor_apis/get_sponsorship_id_test.rb test/integration/call_data_record/

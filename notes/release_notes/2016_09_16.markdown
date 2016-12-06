@@ -1,0 +1,52 @@
+QM v2016_09_16 Release notes
+
+
+
+Changelog:
+* QM app's log is also seen in a dedicated file: /var/log/sdx_qm.log file. It is generated populated by the rsyslog service. It's configuration can be found in /etc/rsyslog.d/sdx_qm.conf file.
+
+* authserver side of check-for-sponsorship-updates api implemented in QM
+
+* delete apis for sponsor, subscriber, sponsorships - just for convenience. It's behavior:
+  - The url and the parameters required for them can be seen in the updated postman files present in the 'postman' folder in the QM app's repo
+  - delete-sponsors: takes sponsor_id as parameter. Passing specific id as string will delete that sponsor. Passing ' * ' deletes all but the logged in sponsor.
+  curl request:
+  curl -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: bbbe9c5c-891f-ad36-6a2b-aa85547939ef" -d '{
+    "request_id": "10000004",
+    "session_id": "9DupW3BAcySMPDN17N42rXM6",
+    "sponsor_id": "*"
+}' "http://dev.sqm.spondata.net/1.0/sponsor/delete-sponsors"
+  - delete-subscribers: takes subscriber_id as parameter. Passing specific id as string will delete that subscriber. Passing ' * ' deletes all but the logged in subscriber.
+  curl request:
+  curl -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: ae5a348f-8b58-d380-c496-14201e2beb5d" -d '{
+    "request_id": "10000004",
+    "session_id": "rqasKJqzQLSv1z21FeMVCyQ6",
+    "subscriber_id": "*"
+}' "http://dev.sqm.spondata.net/1.0/subscriber/delete-subscribers"
+  - delete-sponsorships: takes sponsorship_id as parameter. Passing specific id as string will delete that sponsorship. Passing ' * ' deletes all sponsorships.
+  curl request:
+  curl -X POST -H "Content-Type: application/json" -H "Cache-Control: no-cache" -H "Postman-Token: 974c762b-2990-7b27-13f8-415513ecd0e5" -d '{
+    "request_id": "10000004",
+    "session_id": "9DupW3BAcySMPDN17N42rXM6",
+    "sponsorship_id": "*"
+}' "http://dev.sqm.spondata.net/1.0/sponsor/delete-sponsorships"
+
+
+
+
+Fixed Issues:
+* datamodel issues fixed: The MNO and ControlApp lookup is now based on the newly added fields - sdx_mno_id(int), sdx_app_id(int) - in the respective tables. (Earlier it was using the primary key column "id")
+
+* Instead of the primary key 'id's, these sdx ids are now shown in the read/retrieve sponsorship(s) api response
+
+* MNO name is now added in the read/retrieve sponsorship(s) responses
+
+* Transaction Log entity now seen in admin UI
+
+
+
+
+Test Case Report:
+* All relevant test cases are passing in the server (see attached screenshot). Steps to run them in the server:
+  1) cd /home/Velankani/apps/sdx_qm/current
+  2) RAILS_ENV=test bundle exec rails test test/integration/subscriber_apis/ test/integration/sponsor_apis/ test/integration/call_data_record/ test/integration/claimed_and_unclaimed_bytes/ test/integration/auth_apis/check_for_sponsorship_updates_test.rb

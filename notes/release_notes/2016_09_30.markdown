@@ -1,0 +1,17 @@
+# Next Release
+
+## Deployed to:
+QM Dev and QM Integration
+
+## Changelog
+* Subscriber 2FA - Reregistration of subscriber part is done. If subscriber is trying to reregister then two factor authentication will start from the beginning for the same subscriber. So the flow will be register->2006 Error-Authorization code required->register->0000 Success > reregister -> 2006 Error-Authorization code required->register->0000 Success
+* Terminate sponsorship api
+
+## Fixed Issues
+* Fixed SystemParameter issue in Admin UI. Added status field to it. Now, on successful subscriber login, only active params are returned
+* Fixed Presentation Data issue. Removed it from create sponsorship api response, and added ability to add it from admin UI.
+
+Test Case Report
+* All relevant test cases are passing in the server (see attached screenshot). Steps to run them in the server:
+  1) cd /home/Velankani/apps/sdx_qm/current
+  2) RAILS_ENV=test bundle exec rails test test/integration/subscriber_apis/ test/integration/sponsor_apis/ test/integration/call_data_record/ test/integration/claimed_and_unclaimed_bytes/ test/integration/auth_apis/check_for_sponsorship_updates_test.rb

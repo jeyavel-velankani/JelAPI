@@ -1,0 +1,86 @@
+# Aug 19, 2016 Release Notes
+
+## Deployed APIs
+* Subscriber-side:
+  1) register
+  2) login
+  3) check-for-sponsorship-updates
+  4) activate-sponsorships
+  5) deactivate-sponsorships
+  6) report-sponsorship-quotas-usage
+
+## Tests
+The ruby test cases that I wrote for all APIs can be found in this location of the QM repo: `test/integration/subscriber_apis/`. Depending on the particular APIs complexity, it either gets just a single file or a folder with many files to test different groups of scenarios.
+
+To run these tests, you'd have to have the app set up locally. But I make sure before each deploy the relevant tests are passing. For this release, the tests for the above 6 apis all pass, except for the `register/complete_test.rb` test cases. It comprises of code that will have to be written in the future for completing the registration (sending sms, authcode parts).
+
+You can use the test scenarios I've used to do manual testing as well.
+
+The particular scenario I'm testing in each test case will be mentioned in the very first line of the testcase example.
+
+Eg: These are the scenarios I've written for testing statemachine part of retrieve_sponsorships api, in `retrieve_sponsorships/state_machine_test.rb` file:
+
+
+  test "state machine: with valid input, with a created-spship, status should be retrieved"
+  test "state machine: with valid input, with an already-retrieved-spship, status should be retrieved"
+  test "state machine: with valid input, with an activated-spship, status should remain activated"
+  test "state machine: with valid input, with a deactivated-spship, status should be deactivated"
+  test "state machine: with valid input, with a consumed-spship, status should be consumed"
+  test "state machine: with valid input, with an expired-but-not-updated spship, status should be expired"
+  test "state machine: with valid input, with an expired-spship, status should be expired"
+  test "with quota info that represents a spship that's created, and with large reported usage, should become consumed"
+  test "with quota info that represents a spship that's deactivated, and with large reported usage, should become consumed"
+
+### Postman
+The `postman` folder at the app root has a set of json files that can be imported as a whole in any Postman app. It will import the latest APIs as well as the other collaborating environment and global variables.
+
+## Deployment
+Have deployed to the `http://dev.sqm.spondata.net` server.
+
+The app is deployed to this path:
+`/home/Velankani/apps/sdx_qm/current`
+
+The application log file is (currently) located at:
+`log/staging.log`, relative to the app path above.
+
+## Log Format
+
+This is one line of log from the staging.log file in the server:
+
+It represents an incoming request (subscriber login)
+
+I, [2016-08-19T10:51:11.126999 #2543]  INFO -- : {"method":"POST","path":"/1.0/subscriber/login","format":"json","controller":"Subscriber::SubscribersController","action":"login","status":200,"duration":15.5,"view":7.3,"db":0.0,"time":"2016-08-19T10:51:11.110+00:00","params":{"request_id":"20000002","auth_token":"client auth token","machine_id":"macine id","subscriber_info":{"subscriber_msisdn":"PHONE_NUMBER","subscriber_user_Id":"+19086724200","subscriber_sdx_app_id":"11111","subscriber_type":"TYPE"},"subscriber":{"auth_token":"client auth token","machine_id":"macine id"}},"@timestamp":"2016-08-19T10:51:11.126Z","@version":"1","message":"[200] POST /1.0/subscriber/login (Subscriber::SubscribersController#login)"}
+
+It is parseable, and you can extract many info from this.
+
+Currently, if there are any errors, I'm logging the entire backtrace which will span multiple lines. If this is not preferrable by the devops team, I can just log the essential part of the error in one line.
+
+Error log line example with backtrace:
+E, [2016-08-19T10:51:11.117770 #2543] ERROR -- : Invalid user_id_type
+/home/Velankani/apps/sdx_qm/releases/20160819104918/app/models/subscriber.rb:109:in `to_user_id_type_params!'
+/home/Velankani/apps/sdx_qm/releases/20160819104918/app/controllers/subscriber/subscribers_controller.rb:57:in `login'
+/home/Velankani/apps/sdx_qm/shared/bundle/ruby/2.3.0/gems/actionpack-5.0.0/lib/action_controller/metal/basic_implicit_render.rb:4:in `send_action'
+/home/Velankani/apps/sdx_qm/shared/bundle/ruby/2.3.0/gems/actionpack-5.0.0/lib/abstract_controller/base.rb:188:in `process_action'
+/home/Velankani/apps/sdx_qm/shared/bundle/ruby/2.3.0/gems/actionpack-5.0.0/lib/action_controller/metal/rendering.rb:30:in `process_action'
+/home/Velankani/apps/sdx_qm/shared/bundle/ruby/2.3.0/gems/actionpack-5.0.0/lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+
+
+### Configuration
+* To access underlying RDS mysql directly, use the credentials I had shared earlier via email, or see the `config/secrets.yml` file.
+
+* To restart the app after making some config setting changes, from the app's root path, run this command:
+`touch tmp/restart.txt`
+
+* To test session expiry, change the values in `config/initializers/qm_constants/session_duration.rb` file, and restart app.
+
+* To change application log level, change the setting `config.log_level`'s value in the `config/environments/staging.rb` file, and restart app. Currently it is `:info` - one level above `:debug`. Possible values are, in order of severity: :debug, :info, :warn, :error, :fatal, and :unknown. :debug loglevel will show the raw sql statements that are being executed underneath. Server now has :info level.
+
+
+### Admin Interface
+Can be accessed from this url:
+http://dev.sqm.spondata.net/admins/login
+
+email: admin@example.com
+password: password456SDX
+
+I've populated it with some seed data so you can get started right away. These were the ones I used in the ruby test cases to test all the scenarios I've written.

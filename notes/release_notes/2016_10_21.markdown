@@ -1,0 +1,94 @@
+
+## Deployed to:
+dev and opswork server
+
+## Changelog
+* admin api added. The session expiration value is looked up from the AppConfig table only on non-production env. For Production, it comes from a constant within the code. This will save time by reducing 1 DB lookup. Please see below for the admin apis.
+
+* subscriber register api - 
+a)redirect URL parameter added to the SUCCESSFUL response from  register api. This url can be edited from admin panel.
+
+b) Two factor sms text has been changed to “SDX Authorization Code:<the code>” . This is also configurable from admin panel.
+
+* Sponsor create-sponsorship - presentation-data parameter included in the success response.
+
+* Sponsor read-sponsorship - presentation-data parameter included in the success response.
+
+* Sponsor login - Multiple Machine Id support . Sponsor can login from multiple machine.
+
+## Fixed Issues
+
+## Test Case Report
+* All relevant test cases are passing in the server (see attached screenshot). Steps to run them in the server:
+  1) cd /home/Velankani/apps/sdx_qm/current
+  2) RAILS_ENV=test bundle exec rails test test/integration/subscriber_apis/ test/integration/sponsor_apis/ test/integration/call_data_record/ test/integration/claimed_and_unclaimed_bytes/ test/integration/auth_apis/check_for_sponsorship_updates_test.rb test/models/
+
+
+
+Priority "1" items not part of this release:
+AWS Metrics
+
+
+##Admin API's:
+
+##Admin Login:
+Here admin login api require authenticate user to delete the sponsors,sposorships, subscribers
+
+URL: http://localhost:3000/1.0/admin/login
+Request Params:
+{
+  "request_id": "10000001",
+  "username": "api_admin_user",
+  "password": "password",
+  "machine_id": "1.1.1.1"
+}
+username, password, machine_id are required fields
+
+##Admin - Delete Sponsors API
+
+URL: http://localhost:3000/1.0/admin/delete-sponsors
+
+Request Params:
+{
+    "request_id": "10000004",
+    "session_id": "4T1rWXfkuVvN7Py352YGVeQ9",
+	  "sponsor_id": "*"	
+}
+
+session_id, sponsor_id are required fields
+Delete all sponsors if sponsor_id given as "*"
+Delete only specified sponsors if sponsor_id specified
+Dependency table(Sponsorships, TransactionLogs, TransactionReceipts, SponsorSession) records also will be deleted While deleting the sponsor.
+
+
+##Admin - Delete Sponsorships API
+
+URL: http://localhost:3000/1.0/admin/delete-sponsorships
+
+Request Params:
+{
+    "request_id": "10000004",
+    "session_id":   "{{qm_admin_session_id}}",
+	"sponsorship_id": "*"
+	
+}
+session_id, sponsorship_id are required fields
+Delete all sponsorships from the table if sponsorship_id given as "*"
+Delete only specified sponsorship from the table if sponsorship_id specified
+
+
+##Admin - Delete Subscribers API
+
+URL: http://localhost:3000/1.0/admin/delete-subscribers
+Request Params:
+{
+    "request_id": "10000004",
+    "session_id":   "{{qm_admin_session_id}}",
+	"subscriber_id": "*"
+	
+}
+session_id, subscriber_id are required fields
+Delete all subscribers if subscriber_id given as "*"
+Delete only specified subscriber if subscriber_id specified
+
+

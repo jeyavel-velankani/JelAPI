@@ -1,0 +1,17 @@
+## Changelog
+* subscriber-side apis: retrieve, deactivate, and report quotas usage: With respect to quota_report list, all these 3 apis behave consistently now as per Luke's email
+* subscriber-side: register api: passing blank auth_token will now return 'invalid auth_token' error
+* subscriber-side: register: re-registering will now update auth_token and machine_id
+* Earlier, for a valid sponsorship id (say 1000), passing '1000' and '1000INV' succeeded. Now, only '1000' will succeed.
+
+
+## Items that will be in September
+* dynamodb for billing (will be done in immediate next release - Fri Sep 1)
+* updating bytes claimed/unclaimed columns (will be done in immediate next release - Fri Sep 1)
+
+## Test Case Report
+* All relevant test cases are passing in the server (see attached screenshot).
+
+Steps to run them in the server:
+  1) cd /home/Velankani/apps/sdx_qm/current
+  2) RAILS_ENV=staging bundle exec rails test test/integration/subscriber_apis/ test/integration/sponsor_apis/sponsor_login_test.rb test/integration/sponsor_apis/create_sponsorship/ test/integration/sponsor_apis/read_sponsorship/ test/integration/sponsor_apis/get_sponsorship_id_test.rb

@@ -1,0 +1,20 @@
+QM v2016_09_09 (Sep 9) Release
+
+
+Deployed to:
+dev server
+
+
+Changelog:
+* topup sponsorship api is implemented (quota_increment is assumed to be > 0. <=0 will result in invalid_quota_increment error). The quota_increment value (in megabytes) is added to the existing quota_bytes_total and quota_bytes_unclaimed fields.
+
+
+Fixed Issues:
+* All API requests now have to be content-type 'application/json'. Otherwise 'invalid_request' error response will be received.
+* Passing values like "123INVALID" to mno_id or sponsorship_id in create-sponsorship or read-sponsorship apis will now fail. (reported by Karthik)
+
+
+Test Case Report:
+All relevant test cases are passing in the server (see attached screenshot). Steps to run them in the server:
+  1) cd /home/Velankani/apps/sdx_qm/current
+  2) RAILS_ENV=test bundle exec rails test test/integration/subscriber_apis/ test/integration/sponsor_apis/ test/integration/call_data_record/ test/integration/claimed_and_unclaimed_bytes/
