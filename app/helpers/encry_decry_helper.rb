@@ -21,8 +21,7 @@ module EncryDecryHelper
   end
 
   def encrypt(value)
-  	byebug
-    ci = cipher.encrypt
+  	ci = cipher.encrypt
     ci.key = Digest::SHA256.digest(cipher_key)
     Base64.encode64(ci.update(value.to_s) + ci.final)
   end
