@@ -1606,3 +1606,45 @@ Processing by Catalog::CatalogController#jel_api1 as JSON
 Completed 200 OK in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms)
 
 
+Started POST "/2.0/jel-api1" for 127.0.0.1 at 2016-12-08 10:19:21 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (104.0ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by Catalog::CatalogController#jel_api1 as JSON
+Completed 200 OK in 26ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/2.0/jel-api1" for 127.0.0.1 at 2016-12-08 10:20:26 +0530
+Processing by Catalog::CatalogController#jel_api1 as JSON
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/2.0/jel-api1" for 127.0.0.1 at 2016-12-08 10:23:29 +0530
+Processing by Catalog::CatalogController#jel_api1 as JSON
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/2.0/jel-api1" for 127.0.0.1 at 2016-12-08 10:24:47 +0530
+Processing by Catalog::CatalogController#jel_api1 as JSON
+Completed 200 OK in 26472ms (Views: 0.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/2.0/jel-api1" for 127.0.0.1 at 2016-12-08 10:26:29 +0530
+Processing by Catalog::CatalogController#jel_api1 as JSON
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/2.0/jel-api1" for 127.0.0.1 at 2016-12-08 10:26:45 +0530
+Processing by Catalog::CatalogController#jel_api1 as JSON
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/2.0/jel-api1" for 127.0.0.1 at 2016-12-08 10:27:02 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by Catalog::CatalogController#jel_api1 as JSON
+Completed 200 OK in 3852573ms (Views: 0.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/2.0/jel-api1" for 127.0.0.1 at 2016-12-08 11:31:31 +0530
+Processing by Catalog::CatalogController#jel_api1 as JSON
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
