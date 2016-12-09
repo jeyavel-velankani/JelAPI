@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   
   ActiveAdmin.routes(self)
   
-  root to: 'home#index'
+  # root to: 'home#index'
 
   scope '/1.0', defaults: {format: :json} do
   	post 'jel-api1', to: 'myapis#jel_api1' 
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :chat_rooms, only: [:new, :create, :show, :index]
-  # root 'chat_rooms#index'
+  root 'chat_rooms#index'
   mount ActionCable.server => '/cable'
   
 end

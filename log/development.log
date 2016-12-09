@@ -830,3 +830,139 @@ Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-a
 [ActionCable] [admin@chat.com] ChatRoomsChannel stopped streaming from chat_rooms_2_channel
 [ActionCable] [jeyavel.natesan@velankani.com] Finished "/cable/" [WebSocket] for 127.0.0.1 at 2016-12-08 15:12:57 +0530
 [ActionCable] [jeyavel.natesan@velankani.com] ChatRoomsChannel stopped streaming from chat_rooms_2_channel
+Started GET "/" for 127.0.0.1 at 2016-12-08 15:27:39 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Completed 0  in 24ms (ActiveRecord: 2.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-12-08 15:27:40 +0530
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Completed 0  in 2ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-12-08 15:28:24 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by ChatRoomsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering chat_rooms/index.html.erb within layouts/application
+  [1m[36mChatRoom Load (0.4ms)[0m  [1m[34mSELECT `chat_rooms`.* FROM `chat_rooms`[0m
+  Rendered collection of chat_rooms/_chat_room.html.erb [2 times] (0.7ms)
+  Rendered chat_rooms/index.html.erb within layouts/application (10.1ms)
+Completed 200 OK in 415ms (Views: 382.1ms | ActiveRecord: 3.5ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2016-12-08 15:28:33 +0530
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"8Dgu88pHGhEWkJPCFBDpkSEq4TLro77/HH5FOadsVbnIHeWKYCj++6SD2g+pGz95wKmD7SkxnN+Gz6pbqHH22w=="}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-12-08 15:28:33 +0530
+Processing by ChatRoomsController#index as HTML
+Completed 401 Unauthorized in 5ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-12-08 15:28:33 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (2.2ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (17.2ms)
+Completed 200 OK in 168ms (Views: 165.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-12-08 15:29:04 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.1ms)
+Completed 200 OK in 143ms (Views: 129.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-12-08 16:41:02 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by ChatRoomsController#index as HTML
+Completed 401 Unauthorized in 15ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-12-08 16:41:03 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.3ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (18.7ms)
+Completed 200 OK in 3320ms (Views: 3304.4ms | ActiveRecord: 1.4ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-12-08 16:41:20 +0530
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"B9gzbH8YOYqrlaG1WedLwgugGa5GOi/0LFxgTCeHRPdsmtohfMiSBt1a2X5yH8pxEyzKbL/IQkloA8QzzlVQBg==", "user"=>{"email"=>"jeyavel.natesan@velankani.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'jeyavel.natesan@velankani.com' ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `users` SET `current_sign_in_at` = '2016-12-08 11:11:21', `sign_in_count` = 2, `updated_at` = '2016-12-08 11:11:21' WHERE `users`.`id` = 1[0m
+  [1m[35m (27.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 409ms (ActiveRecord: 28.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-12-08 16:41:21 +0530
+Processing by ChatRoomsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering chat_rooms/index.html.erb within layouts/application
+  [1m[36mChatRoom Load (0.3ms)[0m  [1m[34mSELECT `chat_rooms`.* FROM `chat_rooms`[0m
+  Rendered collection of chat_rooms/_chat_room.html.erb [2 times] (0.6ms)
+  Rendered chat_rooms/index.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 118ms (Views: 111.5ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/chat_rooms/2" for 127.0.0.1 at 2016-12-08 16:41:27 +0530
+Processing by ChatRoomsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mChatRoom Load (0.3ms)[0m  [1m[34mSELECT  `chat_rooms`.* FROM `chat_rooms` WHERE `chat_rooms`.`id` = 2 LIMIT 1[0m
+  [1m[36mMessage Load (0.4ms)[0m  [1m[34mSELECT `messages`.* FROM `messages` WHERE `messages`.`chat_room_id` = 2[0m
+  Rendering chat_rooms/show.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered collection of messages/_message.html.erb [2 times] (6.7ms)
+  Rendered chat_rooms/show.html.erb within layouts/application (14.7ms)
+Completed 200 OK in 174ms (Views: 138.9ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2016-12-08 16:41:27 +0530
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2016-12-08 16:41:27 +0530
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+[ActionCable] [jeyavel.natesan@velankani.com] Registered connection (Z2lkOi8vamVsLWFwLWlzL1VzZXIvMQ)
+[ActionCable] [jeyavel.natesan@velankani.com] ChatRoomsChannel is transmitting the subscription confirmation
+[ActionCable] [jeyavel.natesan@velankani.com] ChatRoomsChannel is streaming from chat_rooms_2_channel
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2016-12-08 16:45:30 +0530
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"z9DHenJVKDn8TDqjrLxFZQcJnmcaS9Xc7ab1yPV9peDGd+Hup2Wq+paiD7fPkT3swaTRSYyg3IIrOFEL2Gb2xg=="}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 9ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-12-08 16:45:30 +0530
+Processing by ChatRoomsController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-12-08 16:45:30 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 121ms (Views: 119.7ms | ActiveRecord: 0.0ms)
+
+
+[ActionCable] [jeyavel.natesan@velankani.com] Finished "/cable/" [WebSocket] for 127.0.0.1 at 2016-12-08 16:45:30 +0530
+[ActionCable] [jeyavel.natesan@velankani.com] ChatRoomsChannel stopped streaming from chat_rooms_2_channel

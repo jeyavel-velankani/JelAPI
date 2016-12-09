@@ -1,6 +1,5 @@
 class ChatRoomsController < ApplicationController
   def index
-    @current_user_email = current_user.email
     @chat_rooms = ChatRoom.all
   end
 
